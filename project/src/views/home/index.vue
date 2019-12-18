@@ -1,108 +1,17 @@
 <template>
   <div >
-    <div class="container" id="home_page">
-      <!-- <van-pull-refresh v-model="isLoading" @refresh="onRefresh"> -->
-        <div class="fixed_title">
-          <van-nav-bar
-            title="鸿运四码"
-            :left-text="left_text"
-            right-text="关于"
-            @click-left="onClickLeft"
-            @click-right="onClickRight"
-          >
-            <span slot="title" @click="gethome">鸿运四码
-              <!-- <van-icon name="replay" /> -->
-            </span>
-          </van-nav-bar>
-        </div>
-        <van-swipe :autoplay="3000" indicator-color="#007BC2">
-          <van-swipe-item  v-for="(image, index) in advs" :key="index">
-            <div class="swipe_img_box" @click="jumpTo(image.url)">
-              <img :src="$https+image.pic" />
-            </div>
-          </van-swipe-item>
-        </van-swipe>
-        <a :href="banner_url" v-show="false" id="banner_a">1</a>
-        
-
-        <div class="gonggao_box" v-if="notice && notice.length>0">
-            <van-button plain type="danger" @click="jumpTo('/home/announcement/index')" size="mini" class="no_radius_btn">公告</van-button>
-            <img src="~@/assets/gonggao.png" alt="" class="gonggao_img">
-            <div class="grow_1">
-              <van-notice-bar>
-                <span v-for="(n,index) in notice" :key="index" style="margin-right:50px;color:#000;" @click="goDetail(n)">
-                  {{n.title}}
-                </span>
-              </van-notice-bar>
-            </div>
-        </div>
-
-        <van-row :gutter="30" class="list_box text_center">
-          <van-col span="6" style="width:25%;padding-left:0;padding-right:0" v-for="(l,index) in list" :key="index">
-            <div class="item_box"  @click="jumpTo(l.link,l.islink)">
-              <img :src="l.src" alt="" class="max_width_100">
-              <span>{{l.title}}</span>
-            </div>
-          </van-col>
-        </van-row>
-
-        <div style="background:#eeeeee;height:0.3rem;"></div>
-
-        <div class="exp_box">
-          <div class="flex type_box" v-if="lottype.length>0">
-            <div v-for="(item,k) in lottype" :key="k">
-              <van-button :class="{mian_bgcolor:active_lt==k}" type="default" size="large" @click="change_active_ly(k)">{{item.lotname}}</van-button>
-            </div>
-          </div>
-
-          <div style="background:#eeeeee;height:0.3rem;"></div>
-
-          <div class="flex fangan_box" v-if="lottype.length>0 && lottype[active_lt].experts.length>0">
-            <div v-for="(item,k) in lottype[active_lt].experts" :key="k" @click="change_active_ep(k)">
-              <van-button :class="{mian_bgcolor:active_ep==k}" type="default" size="large">{{item.expname}}</van-button>
-            </div>
-          </div>
-
-          <div style="background:#eeeeee;height:0.3rem;"></div>
-
-          <div class=" explist_box" v-if="explist.length>0">
-            <div v-for="(item,k) in explist" :key="k">
-              <div class="exp_top"><span class="issue">{{item.issue}}</span><span  v-html="item.kjnum"></span></div>
-              <div class="flex exp_bottom" >
-                <div class="kong" v-if="item.contents.length == 0">
-                  <van-button class="orange_btn" @click="jumpTo('/home/openingMember')">开通会员查看</van-button>
-                </div>
-                <div v-for="(d,i) in item.contents" :key="i" v-html="d"></div>
-              </div>
-              <div style="background:#eeeeee;height:0.3rem;"></div>
-            </div>
-          </div>
-
-          <div class="for_more">
-              <van-button size="small" class="no_border_btn" @click="getexppred">获取更多</van-button>
-          </div>
-
-           <div style="background:#eeeeee;height:0.5rem;"></div>
-
-        </div>
-
-      <!-- </van-pull-refresh> -->
-
-    </div>
-
-    <div class="container" v-if="is_ios" style="background:#F5F5F5;padding-top:0.4rem !important;position:absolute;top:0;z-index:1001;padding-bottom:2rem;">
-        <!-- <title-bar title_name="添加到主屏幕" /> -->
-        <div style="background:#EFEFEF;padding:0.2rem 0.15rem;margin:0 0.3rem 0.2rem;">
-            <div style="text-align:center;font-size:0.5rem;color:#DB3030;font-weight:bold;padding:0.2rem 0;">温馨提示</div>
-            <div style="line-height:1.6;padding-left:0.2rem;font-size:0.4rem;">
-              请务必添加本页面到主屏幕，以便下次访问。
-            </div>
-            <div style="text-align:center;padding:0.4rem 0;">
-              <van-button style="width:3rem;background-color:#D4D4D4;color:#1A1A1A;font-size:0.45rem;" @click="addfn">已添加</van-button>
-              <van-button style="width:3rem;margin-left:1rem;background-color:#87ac55;color:#fff;font-size:0.45rem;" @click="ignore">关闭</van-button>
-            </div>
-        </div>
-        <img src="../../assets/down_iphone.png" alt="" style="width:100%">
+    <div class="fixed_title">
+      <van-nav-bar
+        title="鸿运四码"
+        :left-text="left_text"
+        right-text="关于"
+        @click-left="onClickLeft"
+        @click-right="onClickRight"
+      >
+        <span slot="title" @click="gethome">鸿运四码
+          <!-- <van-icon name="replay" /> -->
+        </span>
+      </van-nav-bar>
     </div>
     
   </div>
