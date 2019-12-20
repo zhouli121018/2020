@@ -9,115 +9,46 @@ const layout = _import('layout/index')
  * @param {*} cache: [boolean]             是否缓存 配合keep-alive
  */
 
-export default [
-    {
-        path: '/',
-        redirect:'/home/index',
-    },
-    {
-        path: '/home',
-        component:layout,
-        children: [
-            {//首页
-                path: 'index',
-                name:'home',
-                component: _import('home/index'),
-                meta:{
-                    title:'鸿运四码',
-                    cache: true
-                }
-            },
-            {//公告
-                path: 'announcement',
-                component: layout,
-                children: [
-                    {
-                        path: 'index',
-                        name: 'announcementIndex',
-                        component: _import('home/announcement/index'),
-                        meta: {
-                            title: '公告',
-                            cache: true
-                        }
-                    },
-                    {//消息详情页
-                        path: 'detail',
-                        name: 'announcementDetail',
-                        component: _import('home/announcement/detail'),
-                        meta: {
-                            title: '公告详情',
-                            cache: false
-                        }
-                    }
-                ]
-            },
-        ]
-    },
-    {
-        component: _import('404/index'),
-        name: '404',
-        path: '/404',
+export default [{
+    path: '/',
+    redirect: '/home/index',
+  },
+  {
+    path: '/home',
+    component: layout,
+    children: [{ //首页
+        path: 'index',
+        name: 'home',
+        component: _import('home/index'),
         meta: {
-            cache: true 
+          title: '活动测试',
+          cache: true
         }
-    },
-    
-    {//个人中心
-        path: '/personal',
-        component:layout,
-        children: [
-            {//用户中心
-                path: 'index',
-                name: 'personalIndex',
-                component: _import('personal/index'),
-                meta: {
-                    title: '用户中心',
-                    cache: true
-                }
-            },
-        ]
-    },
-    {//登录
-        path: '/login',
-        component: layout,
-        children: [
-            {
-                path: 'index',
-                name: 'loginIndex',
-                component: _import('login/index'),
-                meta: {
-                    title: '登录',
-                    cache: true
-                }
-            },
-            {
-                path: 'verification',
-                name: 'verification',
-                component: _import('login/verification'),
-                meta: {
-                    title: '验证码登录',
-                    cache: true
-                }
-            }
-        ]
-    },
-    {//注册
-        path: '/register',
-        component: layout,
-        children: [
-            {
-                path: 'index',
-                name: 'registerIndex',
-                component: _import('register/index'),
-                meta: {
-                    title: '注册',
-                    cache: false
-                }
-            }
-        ]
-    },
-    {
-        path: '*', redirect: '/404'
+      },
+      { //活动测试
+        path: 'test',
+        name: 'test',
+        component: _import('home/test'),
+        meta: {
+          title: '活动测试',
+          cache: false
+        }
+      },
 
-    },
+    ]
+  },
+  {
+    component: _import('404/index'),
+    name: '404',
+    path: '/404',
+    meta: {
+      cache: true
+    }
+  },
+
+  {
+    path: '*',
+    redirect: '/404'
+
+  },
 ]
