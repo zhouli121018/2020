@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>活动测试</title>
     <style>
         .flex{
             display: flex;
@@ -20,7 +20,7 @@
         }
     </style>
     <script src="js/jquery-1.11.3.js"></script>
-    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+    <!-- <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script> -->
 </head>
 <body>
     <div id="login">
@@ -42,15 +42,22 @@
     
     <script>
         $('#go_test_btn').click(function(){
-            var obj = new WxLogin({
-                id:"login", 
-                appid: "wx8ce28a0960fe3a35", 
-                scope: "snsapi_login", 
-                redirect_uri: "http://www.sscby.com/mp/",
-                state: "",
-                style: "",
-                href: ""
-            });
+            var search = location.search;
+            var arr = search.slice(1).split('&');
+            var arr2 = [];
+            console.log(arr)
+            for(var i=0;i<arr.length;i++){
+                var o = arr[i];
+                var c = o.indexOf('=')
+                if(c>0){
+                    arr2[o.slice(0,c)] = o.slice(c+1)
+                }
+            }
+            let pid = '';
+            if(arr2['pid']){
+                pid = arr2['pid']
+            }
+            location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8ce28a0960fe3a35&redirect_uri=http%3a%2f%2fwww.sscby.com%2fmp&response_type=code&scope=snsapi_userinfo&state='+pid+'#wechat_redirect'
             
         })
     </script>

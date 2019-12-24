@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>活动测试</title>
     <style>
         .flex{
             display: flex;
@@ -83,7 +83,7 @@
                 <div class="flex">
                     <div style="padding:28px 28px 8px;">
                         <img id="head_img" src="img/user.png" style="width:64px;" alt />
-                        <b id="nickname" style="font-size:14px;">爱玩的小明</b>
+                        <div><b id="nickname" style="font-size:14px;">爱玩的小明</b></div>
                     </div>
                     <div
                     class="flex_grow_1"
@@ -100,7 +100,7 @@
                     <img src="img/bp_l.png" alt style="width:50px" />
                     <div class="flex_grow_1 hf_box">
                     <!-- <img src="~@/assets/img/hf.png" style="width:100%;" /> -->
-                    ￥928372849249.00
+                    ￥<span id="money">00</span>
                     </div>
                     <img src="img/bp_r.png" alt style="width:50px" />
                 </div>
@@ -108,8 +108,8 @@
                 <div
                     style="color:#FFAB27;text-align:center;position:relative;top:-20px;"
                 >
-                    <span style="font-size: 80px;font-weight:bold;">9.9</span>
-                    <span style="font-size:39px;">万</span>
+                    <span style="font-size: 80px;font-weight:bold;">0</span>
+                    <span id="money_wan" style="font-size:39px;">万</span>
                 </div>
                 <div style="padding: 0 20px 0;">
                     <img src="img/xian.png" alt style="width:100%;" />
@@ -160,6 +160,7 @@
         }
         console.log(arr2)
         if(arr2['code']){
+            alert('ajax')
             let now = new Date();
             let md5_data = md5('token=' + now.getTime() + '&key=lldu43d98382');
             $.ajax({
@@ -168,18 +169,22 @@
                 data:{
                     code:arr2['code'],
                     device:device,
-                    pid:arr2['pid'],
+                    pid:arr2['state'],
                     token:now.getTime(),
                     data:md5_data
                 },
-                success:function(data){
-                    console.log(data)
+                success:function(json){
+                    alert('success')
+                    alert(json)
+                    var data = JSON.parse(json)
                     if(data.message){
                         alert(data.message);
                     }
                     if(data.errorcode == 0){
                         $('#head_img').attr('src',headimgurl);
                         $('#nickname').html(username);
+                        $('#money').html(money);
+                        $('#money_wan').html(money_wan);
                         $('#barcode').attr('src',barcode);
                     }
                     setTimeout(() => {
