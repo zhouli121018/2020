@@ -14,32 +14,186 @@
             flex-grow:1;
         }
         body {
-            background: #fceadb;
+            background: #000;
+            background:rgba(0,0,0,.8);
             padding:0;
             margin:0;
         }
+        html,body{
+            height:100%;
+        }
+        .center_box {
+            background: url('img/bg_2.png') 100% 100% no-repeat #FCEADB;
+            background-size: 100% 100%;
+            min-height: 8rem;
+            border-radius: 0.2rem;
+            padding: 0.2rem 0 0.8rem;
+        }
+
+        .hf_box {
+            background: url('img/hf.png') no-repeat;
+            background-size: 100%;
+            height: 46px;
+            text-align: center;
+            padding-top: 4px;
+            font-size: 17px;
+            color: #FCEADB;
+        }
+
+        .desc_1 {
+            font-size: 16px;
+            font-family: Alibaba PuHuiTi;
+            font-weight: bold;
+            color: rgba(51, 51, 51, 1);
+            padding-left: 10px;
+            padding-top: 4px;
+        }
+
+        .desc_2 {
+            padding: 8px 0 8px 10px;
+            font-size: 12px;
+            font-family: Alibaba PuHuiTi;
+            font-weight: 400;
+            color: rgba(128, 108, 91, 1);
+        }
+
+        .share_box {
+            padding: 10px 0 10px;
+            text-align: center;
+            width: 100%;
+            font-size: 25px;
+            font-family: Alibaba PuHuiTi;
+            font-weight: 400;
+            color: rgba(254, 254, 254, 1);
+        }
     </style>
     <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/md5.js"></script>
+    <script src="js/html2canvas.js"></script>
+    <script>
+        var passwd = md5('123456');
+        console.log(passwd)
+    </script>
 </head>
 <body>
-    <div style="padding:25px 7.5px 0;font-size:0;">
-        <img src="img/bg_1.png" alt style="width:100%;" />
-    </div>
-    <div class="flex">
-        <img src="img/dl_1.png" alt style="width:38px" />
-        <div class="flex_grow_1 flex">
-            <img src="img/dash.png" style="width:56px;height:1.2px;" />
-            <div class="flex_grow_1" style="padding:0 4px;">
-                <img id="go_test_btn" src="img/btn.png" @click="go_test" alt style="width:100%;" />
+    <div style="box-sizing:border-box;height:100%;" id="login">
+        <div class="black_box">
+            <div style="box-sizing:border-box;padding:19px 20px 10px;">
+                <div class="center_box">
+                <div class="flex">
+                    <div style="padding:28px 28px 8px;">
+                        <img id="head_img" src="img/user.png" style="width:64px;" alt />
+                        <b id="nickname" style="font-size:14px;">爱玩的小明</b>
+                    </div>
+                    <div
+                    class="flex_grow_1"
+                    style="text-align:right;padding-right:21px;"
+                    >
+                    <img src="img/2020.png" style="width:162px;" alt />
+                    </div>
+                </div>
+    
+                <div style="padding:0 20px;font-size:0;">
+                    <img src="img/xian.png" alt style="width:100%;" />
+                </div>
+                <div class="flex" style="padding:0 5px;">
+                    <img src="img/bp_l.png" alt style="width:50px" />
+                    <div class="flex_grow_1 hf_box">
+                    <!-- <img src="~@/assets/img/hf.png" style="width:100%;" /> -->
+                    ￥928372849249.00
+                    </div>
+                    <img src="img/bp_r.png" alt style="width:50px" />
+                </div>
+    
+                <div
+                    style="color:#FFAB27;text-align:center;position:relative;top:-20px;"
+                >
+                    <span style="font-size: 80px;font-weight:bold;">9.9</span>
+                    <span style="font-size:39px;">万</span>
+                </div>
+                <div style="padding: 0 20px 0;">
+                    <img src="img/xian.png" alt style="width:100%;" />
+                </div>
+                <div class="flex">
+                    <div class="flex_grow_1" style="padding-left:15px;">
+                    <div class="desc_1">长按识别右边二维码</div>
+                    <div class="desc_2">看看你2020年能赚多少钱</div>
+                    <img src="img/bp.png" style="width:169px;" alt />
+                    </div>
+                    <div style="padding-right:26px;">
+                    <img id="barcode" src="img/waleqrcode.png" style="width:75px;" alt />
+                    </div>
+                </div>
+                </div>
             </div>
-            <img src="img/dash.png" style="width:56px;height:1.2px;" />
+    
+            <!-- <img v-if="!no_img" :src="dataURL" alt="" style="width:100%;" /> -->
+            <div class="share_box" >
+                长按图片保存后，可分享
+            </div>
         </div>
-        <img src="img/dl_2.png" alt style="width:38px" />
+        
     </div>
+
+    
     <script>
-        $('#go_test_btn').click(function(){
-            location.href = 'test.html'
-        })
+        let device ;
+        let u = navigator.userAgent, app = navigator.appVersion;
+        let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+        let isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isAndroid) {
+            device = 0
+        }
+        if (isIOS) {
+            device = 1
+        }
+        var search = location.search;
+        var arr = search.slice(1).split('&');
+        var arr2 = [];
+        console.log(arr)
+        for(var i=0;i<arr.length;i++){
+            var o = arr[i];
+            var c = o.indexOf('=')
+            if(c>0){
+                arr2[o.slice(0,c)] = o.slice(c+1)
+            }
+        }
+        console.log(arr2)
+        if(arr2['code']){
+            let now = new Date();
+            let md5_data = md5('token=' + now.getTime() + '&key=lldu43d98382');
+            $.ajax({
+                url:'getranddata.php',
+                type:'POST',
+                data:{
+                    code:arr2['code'],
+                    device:device,
+                    pid:arr2['pid'],
+                    token:now.getTime(),
+                    data:md5_data
+                },
+                success:function(data){
+                    console.log(data)
+                    if(data.message){
+                        alert(data.message);
+                    }
+                    if(data.errorcode == 0){
+                        $('#head_img').attr('src',headimgurl);
+                        $('#nickname').html(username);
+                        $('#barcode').attr('src',barcode);
+                    }
+                    setTimeout(() => {
+                        html2canvas(document.querySelector("body"),{ background:'#000'}).then(canvas => {
+                            $('body').html('<img src="'+canvas.toDataURL("image/png")+'" style="width:100%;">')
+                        });
+                    }, 500);
+                    
+                }
+            })
+        }
+        
+        
+        
     </script>
 </body>
 </html>
