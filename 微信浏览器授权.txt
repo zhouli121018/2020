@@ -1,0 +1,37 @@
+h5 获取数据流程
+
+1、前往测试页面 地址http://www.sscby.com/mp/test.html?pid=xxx
+
+点击‘前往测试’按钮
+1、先通过以snsapi_userinfo为scope发起的前端网页授权，获取code和openid
+如果用户同意授权，页面将跳转至 redirect_uri/?code=CODE值&state=pid值。
+state=STATE 的值STATE可以传递到重定位页面（测测结果页面）
+
+https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8ce28a0960fe3a35&redirect_uri=http%3a%2f%2fwww.sscby.com%2fmp&response_type=code&scope=snsapi_userinfo&state=pid值#wechat_redirect
+
+重定位到(测试结果页面) http://www.sscby.com/mp/?code=081bNm7F0MkoLe2NdU8F0xQ97F0bNm7u&state=pid值
+
+
+2、通过code和pid 获取头像 昵称 金额数据
+getranddata.php  加密方法跟智者汇一样
+$data='MD5(token='.$token.'&key=lldu43d98382');
+
+请求
+$code=$_POST["code"];//微信授权返回的code
+$device=$_POST["device"];//0android ，1ios
+$pid=$_POST["pid"];//推荐人
+$token=$_POST["token"];//每次都变 当前妙极时间戳+随机数，确保唯一
+$data=$_POST["data"];
+
+
+
+
+返回
+public $errorcode=1;//0表示正常
+public $message;
+public $money='133.2';
+	public $headimgurl='';//头像 相对路径
+	public $money_wan='13.2';
+	public $username='';//昵称
+	public $barcode='';//二维码相对路径;
+
