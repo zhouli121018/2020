@@ -21,6 +21,7 @@
         }
         html,body{
             /* height:100%; */
+            font-family: Arial, Helvetica, sans-serif;
         }
         .center_box {
             background: url('img/bg_2.png') 100% 100% no-repeat #FCEADB;
@@ -32,16 +33,18 @@
         .hf_box {
             background: url('img/hf.png') no-repeat;
             background-size: 100% 100%;
-            height: .92rem;
+            /* height: .91rem; */
+            line-height:.9rem;
+            width:4.83rem;
             text-align: center;
             /* padding-top: .1rem; */
-            font-size: .36rem;
+            font-size: .38rem;
             color: #FCEADB;
         }
 
         .desc_1 {
             font-size: .32rem;
-            font-family: Alibaba PuHuiTi;
+            /* font-family: Alibaba PuHuiTi; */
             font-weight: bold;
             color: rgba(51, 51, 51, 1);
             padding-left: .25rem;
@@ -51,7 +54,7 @@
         .desc_2 {
             padding: .1rem 0 .1rem .25rem;
             font-size: .24rem;
-            font-family: Alibaba PuHuiTi;
+            /* font-family: Alibaba PuHuiTi; */
             font-weight: 400;
             color: rgba(128, 108, 91, 1);
         }
@@ -61,7 +64,7 @@
             text-align: center;
             width: 100%;
             font-size: .4rem;
-            font-family: Alibaba PuHuiTi;
+            /* font-family: Alibaba PuHuiTi; */
             font-weight: 400;
             color: rgba(254, 254, 254, 1);
         }
@@ -76,20 +79,20 @@
     </script>
 </head>
 <body>
-    <div style="box-sizing:border-box;height:100%;padding:.38rem .4rem .01rem;" id="login">
-        <div id="black_box">
+    <div style="box-sizing:border-box;height:100%;padding:.2rem .4rem .01rem;" id="login">
+        <div id="black_box" style="font-size:0;">
             <div style="box-sizing:border-box;position: relative;;left:-150%;" id="img_box">
                 <div class="center_box">
                 <div class="flex">
-                    <div style="padding:0.66rem 0.66rem 0.01rem;">
+                    <div style="padding:0.20rem 0.66rem 0.01rem;">
                         <img id="head_img" src="img/user.png" style="width:1.28rem;border-radius:50%;" alt />
-                        <div style="text-align:center;"><b id="nickname" style="font-size:0.26rem;"></b></div>
+                        <div style="text-align:center;white-space: nowrap;"><b id="nickname" style="font-size:0.26rem;font-family: Arial, Helvetica, sans-serif;"></b></div>
                     </div>
                     <div
                     class="flex_grow_1"
                     style="text-align:right;padding-right:0.52rem;"
                     >
-                    <img src="img/2020.png" style="width:3.5rem;" alt />
+                    <img src="img/2020.png" style="width:98%;" alt />
                     </div>
                 </div>
     
@@ -98,9 +101,9 @@
                 </div>
                 <div class="flex" style="padding:0 .1rem;position:relative;padding-bottom:.1rem;">
                     <img src="img/bp_l.png" alt style="width:1.01rem" />
-                    <div class="flex_grow_1 hf_box">
+                    <div class="flex_grow_1 hf_box" >
                     <!-- <img src="~@/assets/img/hf.png" style="width:100%;" /> -->
-                    ￥<span id="money"></span>
+                    <span style="position:relative;top:-.1rem;">￥<span id="money" ></span></span>
                     
                     </div>
                     <img src="img/bp_r.png" alt style="width:1.01rem" />
@@ -138,6 +141,19 @@
     
     <script>
         $(function(){
+            // setTimeout(() => {
+            //     $('body,html').animate({'scrollTop':0},0,function(){
+            //         html2canvas(document.querySelector("#img_box"),{ 
+            //             background:'#000',
+            //             useCORS: true,
+            //             width:$('#img_box').width(),//设置canvas尺寸与所截图尺寸相同，防止白边
+            //             height:$('#img_box').height(),//防止白边
+            //         }).then(canvas => {
+            //             $('#black_box').html('<img src="'+canvas.toDataURL()+'" style="width:100%;border-radius:.2rem;">')
+            //         });
+            //     });
+                
+            // }, 500);
             let device ;
             let u = navigator.userAgent, app = navigator.appVersion;
             let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
@@ -186,8 +202,18 @@
                             $('#barcode').attr('src',data.barcode);
                         }
                         setTimeout(() => {
-                            html2canvas(document.querySelector("#img_box"),{ background:'#000'}).then(canvas => {
-                                $('#black_box').html('<img src="'+canvas.toDataURL("image/png")+'" style="width:100%;border-radius:.2rem;">')
+                            // html2canvas(document.querySelector("#img_box"),{ background:'#000',useCORS: true}).then(canvas => {
+                            //     $('#black_box').html('<img src="'+canvas.toDataURL("image/png")+'" style="width:100%;border-radius:.2rem;">')
+                            // });
+                            $('body,html').animate({'scrollTop':0},0,function(){
+                                html2canvas(document.querySelector("#img_box"),{ 
+                                    background:'#000',
+                                    useCORS: true,
+                                    width:$('#img_box').width(),//设置canvas尺寸与所截图尺寸相同，防止白边
+                                    height:$('#img_box').height(),//防止白边
+                                }).then(canvas => {
+                                    $('#black_box').html('<img src="'+canvas.toDataURL()+'" style="width:100%;border-radius:.2rem;">')
+                                });
                             });
                         }, 500);
                         
