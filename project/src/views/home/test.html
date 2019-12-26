@@ -18,6 +18,21 @@
             padding:0;
             margin:0;
         }
+		.btn{
+			border: 0;
+			color: #fff;
+			background-color: #BB051D;
+			outline: none;
+			width: 90%;
+			text-align: center;
+			cursor: pointer;
+			font-weight: bold;
+			padding:.2rem .1rem;
+			font-size:.4rem;
+			border-radius:.2rem;
+			letter-spacing: .1rem;
+			margin:0 .1rem;
+		}
     </style>
     <script src="js/jquery-1.11.3.js"></script>
     <!-- <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script> -->
@@ -36,9 +51,10 @@
             <img src="img/dl_1.png" alt style="width:.72rem" />
             <div class="flex_grow_1 flex" >
                 <img src="img/dash.png" style="width:1.02rem;height:.02rem;" />
-                <div class="flex_grow_1" style="padding:0 .1rem;">
-                    <img id="go_test_btn" src="img/btn.png" @click="go_test" alt style="width:100%;" />
-                </div>
+				<!-- <img id="go_test_btn" src="img/btn.png"  alt style="width:100%;cursor:pointer;" /> -->
+                <button type="button" class="flex_grow_1 btn" onclick="go_test()" style="">
+					前往测试
+                </button> 
                 <img src="img/dash.png" style="width:1.02rem;height:.02rem;" />
             </div>
             <img src="img/dl_2.png" alt style="width:.72rem" />
@@ -46,7 +62,7 @@
     </div>
     
     <script>
-        $('#go_test_btn').click(function(){
+		function go_test(){
             var search = location.search;
             var arr = search.slice(1).split('&');
             var arr2 = [];
@@ -64,7 +80,7 @@
             }
             location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx8ce28a0960fe3a35&redirect_uri=http%3a%2f%2fwww.sscby.com%2fmp&response_type=code&scope=snsapi_userinfo&state='+pid+'#wechat_redirect'
             
-        })
+        }
     </script>
 </body>
 </html>
